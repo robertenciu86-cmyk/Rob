@@ -85,6 +85,11 @@ body::before {
     rotate: -2deg; border: 3px solid #fff;
     box-shadow: 5px 5px 0 #e40303, 10px 10px 0 #ff8c00, 15px 15px 0 #ffed00, 20px 20px 0 #008026, 25px 25px 0 #24a8ff, 30px 30px 0 #750787, 0 40px 80px rgba(0,0,0,.5);
 }
+.hero-image.bz-hero-logo {
+    width: min(100%, 400px); height: auto; aspect-ratio: 1; margin-inline: auto;
+    object-fit: contain; border: 0; border-radius: 50%; rotate: 0deg;
+    box-shadow: 0 0 0 8px #fff, 8px 8px 0 8px #e40303, 16px 16px 0 8px #ff8c00, 24px 24px 0 8px #ffed00, 32px 32px 0 8px #008026, 40px 40px 0 8px #24a8ff, 48px 48px 0 8px #750787;
+}
 .trust-row span { border: 1px solid transparent; background: linear-gradient(#2a1046,#2a1046) padding-box, var(--rainbow) border-box; color: var(--text); }
 .trust-row span:nth-child(2) { background: linear-gradient(#2a1046,#2a1046) padding-box, var(--trans) border-box; }
 .trust-row span:nth-child(3) { background: linear-gradient(#2a1046,#2a1046) padding-box, var(--bi) border-box; }
@@ -200,6 +205,7 @@ body::before {
 @media (max-width:760px) {
     .nav-links { background: var(--surface); border-bottom: 4px solid #ff5fae; }
     .hero-image { box-shadow: 4px 4px 0 #e40303, 8px 8px 0 #ff8c00, 12px 12px 0 #ffed00, 16px 16px 0 #008026, 20px 20px 0 #24a8ff, 24px 24px 0 #750787; }
+    .hero-image.bz-hero-logo { width: min(72%, 260px); margin-bottom: 30px; box-shadow: 0 0 0 5px #fff, 5px 5px 0 5px #e40303, 10px 10px 0 5px #ff8c00, 15px 15px 0 5px #ffed00, 20px 20px 0 5px #008026, 25px 25px 0 5px #24a8ff, 30px 30px 0 5px #750787; }
 }
 
 @media (prefers-reduced-motion:no-preference) {

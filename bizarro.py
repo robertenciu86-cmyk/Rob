@@ -123,6 +123,13 @@ def transform(text: str, *, home: bool, version: str, missing: set[str]) -> str:
     # Brendan's face replaces the London logo: small in the header, bigger for sharing.
     text = text.replace('src="/london-comedy-group-logo.jpg"', 'src="/brendan-logo.png"')
     text = text.replace("london-comedy-group-logo.jpg", "brendan-og.jpg")
+    text = text.replace(f"{BRENDAN_URL}/comedy-audience.jpg", f"{BRENDAN_URL}/brendan-og.jpg")
+    text = re.sub(
+        r'<img class="hero-image" src="/comedy-audience\.jpg"[^>]*>',
+        '<img class="hero-image bz-hero-logo" src="/brendan-hero.webp" width="800" height="800" fetchpriority="high"\n'
+        '                 alt="Brendan Comedy Group: Brendan in a patchwork top and denim shorts, arms raised">',
+        text,
+    )
     text = re.sub(r'<div class="sister-banner">.*?</div>', BACK_BANNER, text, count=1, flags=re.S)
 
     for old, new in COPY:
