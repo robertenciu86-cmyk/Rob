@@ -120,6 +120,9 @@ def transform(text: str, *, home: bool, version: str, missing: set[str]) -> str:
     text = re.sub(r"<img[^>]*brendan-comedy-group\.jpg[^>]*>", hold, text)
 
     text = SWAP_RE.sub(lambda m: SWAPS[m.group(0)], text)
+    # Brendan's face replaces the London logo: small in the header, bigger for sharing.
+    text = text.replace('src="/london-comedy-group-logo.jpg"', 'src="/brendan-logo.png"')
+    text = text.replace("london-comedy-group-logo.jpg", "brendan-og.jpg")
     text = re.sub(r'<div class="sister-banner">.*?</div>', BACK_BANNER, text, count=1, flags=re.S)
 
     for old, new in COPY:
@@ -189,7 +192,8 @@ def main() -> int:
         manifest.write_text(
             manifest.read_text(encoding="utf-8")
             .replace('"London Comedy Group"', '"Brendan Comedy Group"')
-            .replace('"LCG Shows"', '"BCG Shows"'),
+            .replace('"LCG Shows"', '"BCG Shows"')
+            .replace('"#090811"', '"#140825"'),
             encoding="utf-8",
         )
     robots = out / "robots.txt"
