@@ -123,12 +123,17 @@ def transform(text: str, *, home: bool, version: str, missing: set[str]) -> str:
         '<a href="/#comedians">Comedians</a>\n                <a href="/#brendan">Brendan gallery</a>',
         1,
     )
-    text = re.sub(
+    theme = f'<link rel="stylesheet" href="/assets/bizarro.css?v={version}">'
+    text, linked = re.subn(
         r'(<link rel="stylesheet" href="/assets/site\.css\?v=[0-9a-f]+">)',
-        rf'\1\n    <link rel="stylesheet" href="/assets/bizarro.css?v={version}">',
+        rf"\1\n    {theme}",
         text,
         count=1,
     )
+    if not linked:
+        # Standalone pages (the catch game) carry inline styles instead of
+        # site.css; load the theme last so its colour variables win.
+        text = text.replace("</head>", f"    {theme}\n</head>", 1)
     if "<!doctype" in text[:40].lower() and "bizarro.js" not in text:
         text = text.replace("</body>", f'    <script src="/assets/bizarro.js?v={version}" defer></script>\n</body>', 1)
 
