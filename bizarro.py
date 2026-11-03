@@ -57,7 +57,7 @@ COPY = [
 ]
 
 BACK_BANNER = ('<div class="sister-banner"><a href="' + LONDON_URL + '/">'
-               'Looking for the sensible one? Visit our sister site, <strong>London Comedy Group</strong> '
+               'Visit our sister site, <strong>London Comedy Group</strong> '
                '<span aria-hidden="true">→</span></a></div>')
 
 GALLERY = [
@@ -69,6 +69,16 @@ GALLERY = [
     ("brendan-6", 450, 600, "Close-up of Brendan lying on stage, looking up", "Hello from down here"),
     ("brendan-7", 450, 600, "Brendan standing in front of a projector screen", "Brendan, after the floor bit"),
 ]
+
+
+RIBBON = ["Everyone welcome", "Free comedy", "Love is love", "Laughs are laughs",
+          "Trans joy", "Brendan approved", "Ridwan tolerated"]
+
+
+def ribbon() -> str:
+    # Two copies back to back so the marquee loops without a gap.
+    spans = "".join(f"<span>{item}</span>" for item in RIBBON * 2)
+    return f'\n    <div class="bz-ribbon-wrap" aria-hidden="true"><div class="bz-ribbon"><div>{spans}</div></div></div>'
 
 
 def gallery_section() -> str:
@@ -138,7 +148,14 @@ def transform(text: str, *, home: bool, version: str, missing: set[str]) -> str:
         text = text.replace("</body>", f'    <script src="/assets/bizarro.js?v={version}" defer></script>\n</body>', 1)
 
     if home:
-        anchor = '\n    <section class="section section-alt">\n        <div class="wrap"><div class="section-heading"><p class="eyebrow">From the rooms</p>'
+        hero = text.find('<section class="hero">')
+        hero_end = text.find("</section>", hero) if hero >= 0 else -1
+        if hero_end >= 0:
+            hero_end += len("</section>")
+            text = text[:hero_end] + ribbon() + text[hero_end:]
+        else:
+            missing.add("hero section")
+        anchor ='\n    <section class="section section-alt">\n        <div class="wrap"><div class="section-heading"><p class="eyebrow">From the rooms</p>'
         if anchor in text:
             text = text.replace(anchor, gallery_section() + anchor, 1)
         else:
