@@ -1,0 +1,86 @@
+/* Brendan Comedy Group: pride theme layered over London's site.css. */
+:root {
+    --bg: #150a26;
+    --surface: #221238;
+    --surface-2: #2d1747;
+    --text: #fff8fd;
+    --muted: #d8c9e8;
+    --pink: #ff5fae;
+    --pink-dark: #e0358c;
+    --blue: #5bcefa;
+    --line: rgba(255,255,255,.16);
+    --rainbow: linear-gradient(90deg,#e40303,#ff8c00,#ffed00,#008026,#24a8ff,#750787);
+    --trans: linear-gradient(90deg,#5bcefa,#f5a9b8,#fff,#f5a9b8,#5bcefa);
+}
+body::before {
+    background:
+        radial-gradient(50% 40% at 6% -6%, rgba(91,206,250,.18), transparent 60%),
+        radial-gradient(50% 45% at 100% -4%, rgba(255,95,174,.22), transparent 55%),
+        radial-gradient(45% 40% at 85% 60%, rgba(117,7,135,.25), transparent 60%),
+        radial-gradient(50% 40% at 30% 118%, rgba(255,237,0,.08), transparent 60%);
+}
+::selection { background: #ffed00; color: #150a26; }
+
+.sister-banner { border: 0; background: var(--trans); }
+.sister-banner a { color: #2a0f3d; font-weight: 700; }
+.sister-banner strong { color: #2a0f3d; }
+
+.site-header { background: rgba(21,10,38,.94); border-bottom: 0; }
+.site-header::after { content: ""; display: block; height: 4px; background: var(--rainbow); }
+.brand img { animation: bz-hue 8s linear infinite; }
+@keyframes bz-hue { to { filter: hue-rotate(360deg); } }
+
+.hero,.page-hero {
+    background:
+        radial-gradient(circle at 78% 30%, rgba(255,95,174,.28), transparent 38%),
+        radial-gradient(circle at 15% 85%, rgba(91,206,250,.18), transparent 40%),
+        linear-gradient(135deg,#1d0b33,#2a0f3d);
+}
+.hero h1, .page-hero h1 {
+    background: linear-gradient(90deg,#ff6b6b,#ffb347,#ffe66d,#6ee7a0,#5bcefa,#c18cff);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.eyebrow::before { background: var(--rainbow); width: 30px; height: 3px; }
+.hero-image { box-shadow: 0 34px 80px rgba(0,0,0,.5), 0 0 0 3px rgba(255,95,174,.35); }
+
+.button-primary {
+    color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,.45);
+    background: linear-gradient(110deg,#e40303,#ff8c00,#d4b800,#008026,#004dff,#750787,#e40303);
+    background-size: 300% 100%;
+}
+.button-primary:hover { background-position: 100% 0; }
+
+.event-card:nth-child(6n+1) .pill { background: #c40000; }
+.event-card:nth-child(6n+2) .pill { background: #d96800; }
+.event-card:nth-child(6n+3) .pill { background: #8a7a00; }
+.event-card:nth-child(6n+4) .pill { background: #007a24; }
+.event-card:nth-child(6n+5) .pill { background: #0046e0; }
+.event-card:nth-child(6n+6) .pill { background: #750787; }
+.pill-row .pill-muted { color: #170a0f; background: #ffd2df; }
+.price-free { color: #1c0b2b; background: var(--trans); }
+
+.comedian-portrait,.act-card img {
+    border: 4px solid transparent;
+    background: conic-gradient(#e40303,#ff8c00,#ffed00,#008026,#24a8ff,#750787,#e40303) border-box;
+}
+.newsletter { background: linear-gradient(135deg,#2d1747,#4a1450); }
+.site-footer { border-top: 0; background: linear-gradient(var(--bg),var(--bg)) padding-box; position: relative; }
+.site-footer::before { content: ""; position: absolute; inset: 0 0 auto; height: 4px; background: var(--rainbow); }
+
+/* The Brendan gallery */
+.bz-grid { columns: 3 240px; column-gap: 14px; }
+.bz-shot { position: relative; display: block; margin-bottom: 14px; break-inside: avoid; border-radius: 18px; overflow: hidden; box-shadow: var(--shadow); text-decoration: none; }
+.bz-shot::after { content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 3px; background: var(--rainbow); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; opacity: 0; transition: opacity .25s ease; pointer-events: none; }
+.bz-shot:hover::after, .bz-shot:focus-visible::after { opacity: 1; }
+.bz-shot img { width: 100%; height: auto; transition: transform .4s cubic-bezier(.2,.7,.2,1); }
+.bz-shot:hover img { transform: scale(1.04); }
+.bz-shot span { position: absolute; inset: auto 0 0; padding: 26px 14px 12px; font-weight: 800; color: #fff; background: linear-gradient(transparent, rgba(21,10,38,.88)); }
+.bz-lightbox { max-width: min(92vw,1100px); max-height: 92vh; padding: 0; border: 0; border-radius: 18px; background: var(--surface); color: var(--text); overflow: hidden; }
+.bz-lightbox::backdrop { background: rgba(10,4,20,.86); }
+.bz-lightbox img { max-width: 100%; max-height: calc(92vh - 56px); margin: 0 auto; }
+.bz-lightbox p { margin: 0; padding: 12px 56px 14px 16px; font-weight: 800; }
+.bz-lightbox button { position: absolute; top: 10px; right: 10px; width: 40px; height: 40px; border: 0; border-radius: 50%; background: rgba(21,10,38,.75); color: #fff; font-size: 1.5rem; line-height: 1; cursor: pointer; }
+
+@media (prefers-reduced-motion: reduce) {
+    .brand img { animation: none; }
+}
